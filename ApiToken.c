@@ -3,17 +3,17 @@
 #include <time.h>
 
 int main(){
-
-	int	NumUsuario=0;
+	
+	int	numUsuario=0;
+	int	limiteUsuarios=1;
 	int indice=0;
 	int indiceCadena=0;
-	int sizeIndice=0;
-	int sizeUsua=0;
+	int sizeUsuaExis=0;
 	int sizeUsuaIng=0;
-	int sizeContra=0;
+	int sizeContraExis=0;
 	int sizeContraIng=0;
 	int tiempoCaducidad=300;
-
+	
 	char usuarioIng[15];
 	char contraseniaIng[15];
 	
@@ -170,7 +170,7 @@ int main(){
 	usuario[16][5]='e';
 	usuario[16][6]='s';
 	usuario[16][7]=00;
-		
+	
 	usuario[17][0]='A';
 	usuario[17][1]='l';
 	usuario[17][2]='b';
@@ -195,7 +195,7 @@ int main(){
 	usuario[19][5]='e';
 	usuario[19][6]='s';
 	usuario[19][7]=00;
-	
+		
 	usuario[20][0]=00;
 	
 	char contrasenia[21][15];
@@ -445,7 +445,7 @@ int main(){
 	fechaNacimiento[3][4]='1';
 	fechaNacimiento[3][5]='4';
 	fechaNacimiento[3][6]=00;
-		
+	
 	fechaNacimiento[4][0]='1';
 	fechaNacimiento[4][1]='2';
 	fechaNacimiento[4][2]='1';
@@ -492,6 +492,7 @@ int main(){
 	fechaNacimiento[9][3]='5';
 	fechaNacimiento[9][4]='8';
 	fechaNacimiento[9][5]='4';
+	fechaNacimiento[9][6]=00;
 	
 	fechaNacimiento[10][0]='2';
 	fechaNacimiento[10][1]='4';
@@ -564,7 +565,7 @@ int main(){
 	fechaNacimiento[18][4]='9';
 	fechaNacimiento[18][5]='4';
 	fechaNacimiento[18][6]=00;
-		
+	
 	fechaNacimiento[19][0]='3';
 	fechaNacimiento[19][1]='0';
 	fechaNacimiento[19][2]='0';
@@ -574,8 +575,8 @@ int main(){
 	fechaNacimiento[19][6]=00;
 	
 	fechaNacimiento[20][0]=00;
-
-
+	
+	
 	
 	printf("_________________________________\n");
 	printf("\nIngresa tu nombre de usuario: ");
@@ -585,65 +586,72 @@ int main(){
 	printf("\nIngresa tu contrase%ca: ", 164);
 	scanf("%s", &contraseniaIng);
 	
-
 	
-	while(usuario[NumUsuario][indice]!=0){//Obtenemos el tamaño del arreglo
-		NumUsuario++;
+	
+	while(usuario[numUsuario][indice]!=0){//Obtenemos el tamaño del arreglo
+		numUsuario++;
 	}
 	
 	while(usuarioIng[sizeUsuaIng] != 0){//Obtenemos el tamaño de la cadena usuario ingresado
 		sizeUsuaIng++;
 	}
- 		
+	
 	while(contraseniaIng[sizeContraIng] != 0){//Obtenemos el tamaño de la cadena contraseña ingresada
 		sizeContraIng++;
 	}
 	
-
-	for(indice=0; indice<NumUsuario; indice++){//Itero sobre el tamaño existente de mi arreglo usuario
 	
-		sizeUsua=0;
-		while(usuario[indice][sizeUsua] != 0){//Obtenemos el tamaño de la cadena usuario existente
-			sizeUsua++;
+	for(indice=0; indice<numUsuario; indice++){//Itero sobre el tamaño existente de mi arreglo usuario
+		
+		sizeUsuaExis=0;
+		while(usuario[indice][sizeUsuaExis] != 0){//Obtenemos el tamaño de la cadena usuario existente
+			sizeUsuaExis++;
 		}
-	
-		sizeContra= 0;
-		while(contrasenia[indice][sizeContra] != 0){//Obtenemos el tamaño de la contraseña existente
-			sizeContra++;
+		
+		sizeContraExis= 0;
+		while(contrasenia[indice][sizeContraExis] != 0){//Obtenemos el tamaño de la contraseña existente
+			sizeContraExis++;
 		}
-	
-		if(sizeUsua!=sizeUsuaIng || sizeContra!=sizeContraIng){//Comparamos el tamaño usuario existente con el usuario ingresado
-			printf("");
-			
+		
+		if(sizeUsuaExis!=sizeUsuaIng || sizeContraExis!=sizeContraIng){//Comparamos el tamaño usuario existente con el usuario ingresado
+			if(numUsuario == (indice+limiteUsuarios)){//Pintamos el mensaje de datos incorrectos una vez que haya llegado al final del arreglo
+				printf("\n Datos de acceso incorrectos \n");
+			}
 			
 		}else{//Iniciamos la comparación del usuario existente con el usuario ingresado
 			
-			while((usuario[indice][indiceCadena]  == usuarioIng[indiceCadena]) && indiceCadena < sizeUsua){ //Comparamos la igualdad del usuario con usuario ingresado mientras que el indice sea menor al tamaño de la cadena usuario
+			indiceCadena =0;
+			while((usuario[indice][indiceCadena]  == usuarioIng[indiceCadena]) && indiceCadena < sizeUsuaExis){ //Comparamos la igualdad del usuario con usuario ingresado mientras que el indice sea menor al tamaño de la cadena usuario
 				indiceCadena++;
 			}
-					
-			if(indiceCadena!=sizeUsua){
-				printf("\nDatos de acceso incorrectos1");
 			
+			if(indiceCadena!=sizeUsuaExis){
+				
+				if(numUsuario == (indice+limiteUsuarios)){//Pintamos el mensaje de datos incorrectos una vez que haya llegado al final del arreglo
+					printf("\n Datos de acceso incorrectos \n");
+				}
 			}else{//Inciamos comparación de contraseña
+					
 				indiceCadena=0;
-				while((contrasenia[indice][indiceCadena] == contraseniaIng[indiceCadena]) && indiceCadena < sizeContra){ //Comparamos la igualdad de la contraseña existente con la contraeña ingresada mientras que el indiceCadena sea menor al tamaño de la cadena contraseña
+				while((contrasenia[indice][indiceCadena] == contraseniaIng[indiceCadena]) && indiceCadena < sizeContraExis){ //Comparamos la igualdad de la contraseña existente con la contraeña ingresada mientras que el indiceCadena sea menor al tamaño de la cadena contraseña
 					indiceCadena++;
 					
 				}
-			
-				if(indiceCadena != sizeContra){//Si la contaseña es distinta en caracteres y tamaño
-					printf("\nDatos de acceso incorrectos2\n");
 				
+				if(indiceCadena != sizeContraExis){//Si la contaseña es distinta en caracteres y tamaño	procedemos a indicar que los datos son incorrectos				
+					
+					if(numUsuario == (indice+limiteUsuarios)){//Pintamos el mensaje de datos incorrectos una vez que haya llegado al final del arreglo
+						printf("\n Datos de acceso incorrectos \n");
+					}
+					
 				}else{
 					
-					time_t tiempoActual = time(NULL);
+					time_t tiempoActual = time(NULL); //Obtenemos la hora actual del sistema
 					struct tm *tlocal = localtime(&tiempoActual);
 					char output[128];
 					strftime(output,128,"%d/%m/%y.%H:%M:%S",tlocal);
 					
-					
-					time_t tiempoAumentado = time(NULL) + tiempoCaducidad;
+					time_t tiempoAumentado = time(NULL) + tiempoCaducidad; //Sumamos segundos para crear la fecha de caducidad del token
 					struct tm *tAumento=localtime(&tiempoAumentado);
 					char outputCaducidad[128];
 					strftime(outputCaducidad,128,"%d/%m/%y.%H:%M:%S",tAumento);
@@ -656,8 +664,11 @@ int main(){
 			}
 		}
 	}
-return 0;
-
+	return 0;
+	
 }
-
-
+	
+	
+	
+	
+	
